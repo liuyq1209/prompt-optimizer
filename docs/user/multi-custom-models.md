@@ -140,7 +140,7 @@ docker run -d -p 8081:80 \
   -e VITE_CUSTOM_API_MODEL_qwen3=qwen3:8b \
   --restart unless-stopped \
   --name prompt-optimizer \
-  linshen/prompt-optimizer
+  prompt-optimizer
 ```
 
 #### 方式2：环境变量文件
@@ -163,7 +163,7 @@ VITE_CUSTOM_API_MODEL_qwen3=qwen3:8b
 docker run -d -p 8081:80 --env-file .env \
   --restart unless-stopped \
   --name prompt-optimizer \
-  linshen/prompt-optimizer
+  prompt-optimizer
 ```
 
 #### 方式3：Docker Compose
@@ -173,7 +173,9 @@ docker run -d -p 8081:80 --env-file .env \
 ```yaml
 services:
   prompt-optimizer:
-    image: linshen/prompt-optimizer:latest
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
     env_file:
       - .env  # 从 .env 文件读取环境变量
     ports:

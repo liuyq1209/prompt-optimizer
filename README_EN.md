@@ -10,7 +10,7 @@
 <a href="https://trendshift.io/repositories/13813" target="_blank"><img src="https://trendshift.io/api/badge/repositories/13813" alt="linshenkx%2Fprompt-optimizer | Trendshift" style="width: 250px; height: 55px;" width="250" height="55"/></a>
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Docker Pulls](https://img.shields.io/docker/pulls/linshen/prompt-optimizer)](https://hub.docker.com/r/linshen/prompt-optimizer)
+[comment]: <> (Removed external Docker Hub badge)
 ![GitHub forks](https://img.shields.io/github/forks/linshenkx/prompt-optimizer?style=flat)
 [![Deploy with Vercel](https://img.shields.io/badge/Vercel-indigo?style=flat&logo=vercel)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Flinshenkx%2Fprompt-optimizer)
 
@@ -94,7 +94,7 @@ Download the latest version from [GitHub Releases](https://github.com/linshenkx/
 <summary>Click to view Docker deployment commands</summary>
 ```bash
 # Run container (default configuration)
-docker run -d -p 8081:80 --restart unless-stopped --name prompt-optimizer linshen/prompt-optimizer
+docker run -d -p 8081:80 --restart unless-stopped --name prompt-optimizer prompt-optimizer
 
 # Run container (with API key configuration and password protection)
 docker run -d -p 8081:80 \
@@ -103,7 +103,7 @@ docker run -d -p 8081:80 \
   -e ACCESS_PASSWORD=your_password \  # Set access password
   --restart unless-stopped \
   --name prompt-optimizer \
-  linshen/prompt-optimizer
+  prompt-optimizer
 ```
 </details>
 
@@ -149,7 +149,9 @@ You can also directly edit the docker-compose.yml file to customize your configu
 services:
   prompt-optimizer:
     # Use Docker Hub image
-    image: linshen/prompt-optimizer:latest
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
     container_name: prompt-optimizer
     restart: unless-stopped
     ports:
@@ -191,7 +193,7 @@ docker run -d -p 8081:80 \
   -e VITE_OPENAI_API_KEY=your-openai-key \
   -e MCP_DEFAULT_MODEL_PROVIDER=openai \
   --name prompt-optimizer \
-  linshen/prompt-optimizer
+  prompt-optimizer
 ```
 
 The MCP Server will then be accessible at `http://localhost:8081/mcp`.

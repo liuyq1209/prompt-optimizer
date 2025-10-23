@@ -10,7 +10,7 @@
 <a href="https://trendshift.io/repositories/13813" target="_blank"><img src="https://trendshift.io/api/badge/repositories/13813" alt="linshenkx%2Fprompt-optimizer | Trendshift" style="width: 250px; height: 55px;" width="250" height="55"/></a>
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Docker Pulls](https://img.shields.io/docker/pulls/linshen/prompt-optimizer)](https://hub.docker.com/r/linshen/prompt-optimizer)
+[comment]: <> (移除外部 Docker Hub 徽章)
 ![GitHub forks](https://img.shields.io/github/forks/linshenkx/prompt-optimizer?style=flat)
 [![Deploy with Vercel](https://img.shields.io/badge/Vercel-indigo?style=flat&logo=vercel)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Flinshenkx%2Fprompt-optimizer)
 
@@ -95,7 +95,7 @@ Prompt Optimizer是一个强大的AI提示词优化工具，帮助你编写更�
 
 ```bash
 # 运行容器（默认配置）
-docker run -d -p 8081:80 --restart unless-stopped --name prompt-optimizer linshen/prompt-optimizer
+docker run -d -p 8081:80 --restart unless-stopped --name prompt-optimizer prompt-optimizer
 
 # 运行容器（配置API密钥和访问密码）
 docker run -d -p 8081:80 \
@@ -104,11 +104,11 @@ docker run -d -p 8081:80 \
   -e ACCESS_PASSWORD=your_password \  # 设置访问密码
   --restart unless-stopped \
   --name prompt-optimizer \
-  linshen/prompt-optimizer
+  prompt-optimizer
 ```
 </details>
 
-> **国内镜像**: 如果Docker Hub访问较慢，可以将上述命令中的 `linshen/prompt-optimizer` 替换为 `registry.cn-guangzhou.aliyuncs.com/prompt-optimizer/prompt-optimizer`
+> 注：已移除公共镜像示例，请使用本地/私有仓库镜像
 
 ### 6. Docker Compose部署
 <details>
@@ -143,7 +143,9 @@ MCP 服务器：http://localhost:8081/mcp
 services:
   prompt-optimizer:
     # 使用Docker Hub镜像
-    image: linshen/prompt-optimizer:latest
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
     # 或使用阿里云镜像（国内用户推荐）
     # image: registry.cn-guangzhou.aliyuncs.com/prompt-optimizer/prompt-optimizer:latest
     container_name: prompt-optimizer
@@ -188,7 +190,7 @@ docker run -d -p 8081:80 \
   -e VITE_OPENAI_API_KEY=your-openai-key \
   -e MCP_DEFAULT_MODEL_PROVIDER=openai \
   --name prompt-optimizer \
-  linshen/prompt-optimizer
+  prompt-optimizer
 ```
 
 那么 MCP Server 将可以通过 `http://localhost:8081/mcp` 访问。

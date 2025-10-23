@@ -20,7 +20,7 @@ docker run -d -p 8081:80 \
   -e VITE_OPENAI_API_KEY=your-openai-key \
   -e MCP_DEFAULT_MODEL_PROVIDER=openai \
   --name prompt-optimizer \
-  linshen/prompt-optimizer
+  prompt-optimizer
 
 # Access URLs
 # Web Interface: http://localhost:8081

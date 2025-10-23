@@ -112,7 +112,7 @@ docker run -d -p 8081:80 \
   -e VITE_CUSTOM_API_MODEL_claude=claude-3-sonnet \
   --restart unless-stopped \
   --name prompt-optimizer \
-  linshen/prompt-optimizer
+  prompt-optimizer
 ```
 
 #### Method 2: Environment File
@@ -135,7 +135,7 @@ Run with environment file:
 docker run -d -p 8081:80 --env-file .env \
   --restart unless-stopped \
   --name prompt-optimizer \
-  linshen/prompt-optimizer
+  prompt-optimizer
 ```
 
 #### Method 3: Docker Compose
@@ -145,7 +145,9 @@ Modify `docker-compose.yml` to add `env_file` configuration:
 ```yaml
 services:
   prompt-optimizer:
-    image: linshen/prompt-optimizer:latest
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
     env_file:
       - .env  # Read environment variables from .env file
     ports:

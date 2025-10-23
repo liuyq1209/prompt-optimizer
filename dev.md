@@ -46,26 +46,26 @@ pnpm dev:desktop:fresh # Desktop开发（完整重置）：清理+重装+启动
 $VERSION=$(node -p "require('./package.json').version")
 
 # 构建镜像（使用动态版本号）
-docker build -t linshen/prompt-optimizer:$VERSION .
+docker build -f docker/Dockerfile -t prompt-optimizer:$VERSION .
 
 # 添加latest标签
-docker tag linshen/prompt-optimizer:$VERSION linshen/prompt-optimizer:latest
+docker tag prompt-optimizer:$VERSION prompt-optimizer:latest
 
 # 运行容器
-docker run -d -p 80:80 --restart unless-stopped --name prompt-optimizer -e ACCESS_PASSWORD=1234!@#$  linshen/prompt-optimizer:$VERSION
+docker run -d -p 80:80 --restart unless-stopped --name prompt-optimizer -e ACCESS_PASSWORD=1234!@#$  prompt-optimizer:$VERSION
 
 
 # 推送
-docker push linshen/prompt-optimizer:$VERSION
-docker push linshen/prompt-optimizer:latest
+docker push prompt-optimizer:$VERSION
+docker push prompt-optimizer:latest
 
 ```
 
 docker本地构建测试
 ```shell
-docker build -t linshen/prompt-optimizer:test .
+docker build -f docker/Dockerfile -t prompt-optimizer:test .
 docker rm -f prompt-optimizer
-docker run -d -p 80:80 --restart unless-stopped --name prompt-optimizer -e VITE_GEMINI_API_KEY=111 linshen/prompt-optimizer:test
+docker run -d -p 80:80 --restart unless-stopped --name prompt-optimizer -e VITE_GEMINI_API_KEY=111 prompt-optimizer:test
 
 ```
 

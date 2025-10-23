@@ -27,7 +27,7 @@ RUN npm config set registry ${NPM_REGISTRY}
 RUN npm install -g pnpm
 
 # 复制Nginx配置
-COPY docker/nginx.conf /etc/nginx/conf.d/default.conf
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # 复制Web应用
 COPY --from=build /app/packages/web/dist /usr/share/nginx/html
@@ -55,11 +55,11 @@ ENV MCP_LOG_LEVEL=info
 WORKDIR /app/mcp-server
 
 # 复制并设置启动脚本
-COPY docker/generate-config.sh /docker-entrypoint.d/40-generate-config.sh
-COPY docker/generate-auth.sh /docker-entrypoint.d/30-generate-auth.sh
-COPY docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-COPY docker/start.sh /start.sh
-COPY docker/start-services.sh /start-services.sh
+COPY generate-config.sh /docker-entrypoint.d/40-generate-config.sh
+COPY generate-auth.sh /docker-entrypoint.d/30-generate-auth.sh
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY start.sh /start.sh
+COPY start-services.sh /start-services.sh
 
 # 确保脚本有执行权限
 RUN chmod +x /docker-entrypoint.d/40-generate-config.sh
