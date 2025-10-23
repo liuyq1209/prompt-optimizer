@@ -13,8 +13,42 @@ export function createStaticModels(envVars: {
   CUSTOM_API_KEY: string;
   CUSTOM_API_BASE_URL: string;
   CUSTOM_API_MODEL: string;
+  // Enterprise/private deployment (optional overrides)
+  HTSC_API_BASE_URL?: string;
+  HTSC_API_MODEL?: string;
+  HTSC_API_KEY?: string;
+  HTSC_ENABLED?: boolean | string;
 }): Record<string, ModelConfig> {
   return {
+    // saasDeepseekv3: {
+    //   name: 'ht::saas-deepseek-v3',
+    //   baseURL:  'http://168.63.65.40:8090/llm-service/v1/chat/completions',
+    //   models: ['saas-deepseek-v3','saas-deepseek-r1'],
+    //   defaultModel: 'saas-deepseek-v3',
+    //   apiKey: envVars.HTSC_API_KEY,
+    //   enabled: true,
+    //   provider: 'ht',
+    //   llmParams: {}
+    // },
+    htsc:{
+      name: 'htsc',
+      baseURL:  'http://webassist.saassit.htsc.com.cn/llmproxy/web/unauth/LLM_api_proxy/v1/chat/completions',
+      models: [
+        'ht::saas-deepseek-v3',
+        'ht::saas-deepseek-r1',
+        'ht::saas-deepseek-r1-thinking',
+        'ht::saas-doubao-15-pro-32k',
+        'ht::qwen-25-14b-int4',
+        'ht::qwen-25-14b-int4-noft',
+        'ht::local-qwq-32b',
+        'ht::local-qwen-25-vl-7b',
+        'ht::saas-doubao-1.5-vl-pro-32k'
+      ],
+      defaultModel: 'ht::saas-deepseek-v3',
+      enabled: true,
+      provider: 'ht',
+      llmParams: {}
+    },
     openai: {
       name: 'OpenAI',
       baseURL: 'https://api.openai.com/v1',
@@ -74,6 +108,6 @@ export function createStaticModels(envVars: {
       enabled: !!envVars.CUSTOM_API_KEY,
       provider: 'custom',
       llmParams: {}
-    }
+    },
   };
 }

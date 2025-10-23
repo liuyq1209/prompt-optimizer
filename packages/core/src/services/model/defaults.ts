@@ -12,7 +12,10 @@ const staticModels: Record<string, ModelConfig> = createStaticModels({
   ZHIPU_API_KEY: getEnvVar('VITE_ZHIPU_API_KEY').trim(),
   CUSTOM_API_KEY: getEnvVar('VITE_CUSTOM_API_KEY').trim(),
   CUSTOM_API_BASE_URL: getEnvVar('VITE_CUSTOM_API_BASE_URL'),
-  CUSTOM_API_MODEL: getEnvVar('VITE_CUSTOM_API_MODEL')
+  CUSTOM_API_MODEL: getEnvVar('VITE_CUSTOM_API_MODEL'),
+  HTSC_API_BASE_URL: getEnvVar('VITE_HTSC_API_BASE_URL'),
+  HTSC_API_MODEL: getEnvVar('VITE_HTSC_API_MODEL'),
+  HTSC_API_KEY: getEnvVar('VITE_HTSC_API_KEY').trim(),
 });
 
 /**

@@ -833,6 +833,21 @@ const handleFetchEditingModels = async () => {
   isLoadingModels.value = true;
   
   try {
+    // 检查是否为htsc模型，如果是则直接使用静态配置
+    if (editingModel.value.originalKey === 'htsc') {
+      const originalModel = await modelManager.getModel('htsc');
+      if (originalModel && originalModel.models && originalModel.models.length > 0) {
+        modelOptions.value = originalModel.models.map(m => ({ value: m, label: m }));
+        toast.success(t('modelManager.fetchModelsSuccess', {count: originalModel.models.length}));
+        
+        // 如果当前选择的模型不在列表中，默认选择第一个
+        if (!originalModel.models.some(m => m === editingModel.value.defaultModel)) {
+          editingModel.value.defaultModel = originalModel.models[0];
+        }
+        return;
+      }
+    }
+    
     // 获取要使用的配置
     let apiKey = editingModel.value.apiKey;
     const baseURL = editingModel.value.baseURL;
@@ -902,6 +917,21 @@ const handleFetchNewModels = async () => {
   isLoadingModels.value = true;
   
   try {
+    // 检查是否为htsc模型，如果是则直接使用静态配置
+    if (provider === 'htsc') {
+      const originalModel = await modelManager.getModel('htsc');
+      if (originalModel && originalModel.models && originalModel.models.length > 0) {
+        modelOptions.value = originalModel.models.map(m => ({ value: m, label: m }));
+        toast.success(t('modelManager.fetchModelsSuccess', {count: originalModel.models.length}));
+        
+        // 默认选择第一个模型
+        if (originalModel.models.length > 0) {
+          newModel.value.defaultModel = originalModel.models[0];
+        }
+        return;
+      }
+    }
+    
     // 使用注入的 LLM 服务获取模型列表
     // const llm = createLLMService(modelManager);
     

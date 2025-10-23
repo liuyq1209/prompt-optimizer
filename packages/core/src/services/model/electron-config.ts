@@ -82,7 +82,11 @@ export class ElectronConfigManager {
       ZHIPU_API_KEY: getEnv('VITE_ZHIPU_API_KEY').trim(),
       CUSTOM_API_KEY: getEnv('VITE_CUSTOM_API_KEY').trim(),
       CUSTOM_API_BASE_URL: getEnv('VITE_CUSTOM_API_BASE_URL'),
-      CUSTOM_API_MODEL: getEnv('VITE_CUSTOM_API_MODEL')
+      CUSTOM_API_MODEL: getEnv('VITE_CUSTOM_API_MODEL'),
+      HTSC_API_BASE_URL: getEnv('VITE_HTSC_API_BASE_URL'),
+      HTSC_API_MODEL: getEnv('VITE_HTSC_API_MODEL'),
+      HTSC_API_KEY: getEnv('VITE_HTSC_API_KEY').trim(),
+      HTSC_ENABLED: getEnv('VITE_HTSC_ENABLED')
     });
 
 

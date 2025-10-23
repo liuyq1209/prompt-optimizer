@@ -21,6 +21,14 @@ export default defineConfig(({ mode }) => {
       watch: {
         // 确保监视monorepo中其他包的变化
         ignored: ['!**/node_modules/@prompt-optimizer/**']
+      },
+      proxy: {
+        '/llmproxy/': {
+          target: 'http://webassist.saassit.htsc.com.cn/',
+          changeOrigin: true,
+          pathRewrite: { '^/llmproxy': '/llmproxy' },
+          logLevel: 'debug',
+        }
       }
     },
     build: {

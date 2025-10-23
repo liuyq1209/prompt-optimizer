@@ -533,18 +533,19 @@ export class LLMService implements ILLMService {
             callbacks.onReasoningToken(reasoningContent);
           }
           await new Promise(resolve => setTimeout(resolve, 10));
+        }else{
+        // 处理主要内容
+          const content = chunk.choices[0]?.delta?.content || '';
+          if (content) {
+            accumulatedContent += content;
+            
+            // 使用流式think标签处理
+            this.processStreamContentWithThinkTags(content, callbacks, thinkState);
+            
+            await new Promise(resolve => setTimeout(resolve, 10));
+          }
         }
 
-        // 处理主要内容
-        const content = chunk.choices[0]?.delta?.content || '';
-        if (content) {
-          accumulatedContent += content;
-          
-          // 使用流式think标签处理
-          this.processStreamContentWithThinkTags(content, callbacks, thinkState);
-          
-          await new Promise(resolve => setTimeout(resolve, 10));
-        }
       }
 
       console.log('流式响应完成');

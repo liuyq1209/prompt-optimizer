@@ -34,6 +34,12 @@ VITE_ZHIPU_API_KEY=your_zhipu_key_here
 VITE_CUSTOM_API_KEY=your_custom_key_here
 VITE_CUSTOM_API_BASE_URL=your_custom_base_url
 VITE_CUSTOM_API_MODEL=your_custom_model
+
+# HTSC 企业级 API
+VITE_HTSC_API_KEY=your_htsc_api_key_here
+VITE_HTSC_API_BASE_URL=http://168.63.65.40:8090/llm-service/v1/chat/completions
+VITE_HTSC_API_MODEL=ht::saas-deepseek-v3
+VITE_HTSC_ENABLED=true
 ```
 
 **优点**：

@@ -1094,7 +1094,11 @@ function setupIPC() {
         VITE_ZHIPU_API_KEY: process.env.VITE_ZHIPU_API_KEY || '',
         VITE_CUSTOM_API_KEY: process.env.VITE_CUSTOM_API_KEY || '',
         VITE_CUSTOM_API_BASE_URL: process.env.VITE_CUSTOM_API_BASE_URL || '',
-        VITE_CUSTOM_API_MODEL: process.env.VITE_CUSTOM_API_MODEL || ''
+        VITE_CUSTOM_API_MODEL: process.env.VITE_CUSTOM_API_MODEL || '',
+        VITE_HTSC_API_KEY: process.env.VITE_HTSC_API_KEY || '',
+        VITE_HTSC_API_BASE_URL: process.env.VITE_HTSC_API_BASE_URL || '',
+        VITE_HTSC_API_MODEL: process.env.VITE_HTSC_API_MODEL || '',
+        VITE_HTSC_ENABLED: process.env.VITE_HTSC_ENABLED || ''
       };
 
       // 扫描动态自定义模型环境变量

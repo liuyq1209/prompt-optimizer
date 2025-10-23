@@ -34,6 +34,14 @@ export default defineConfig({
   },
   server: {
     port: 5174,
-    https: {}
+    https: {},
+    proxy: {
+      '/llmproxy/': {
+        target: 'http://webassist.saassit.htsc.com.cn/',
+        changeOrigin: true,
+        pathRewrite: { '^/llmproxy': '/llmproxy' },
+        logLevel: 'debug',
+      }
+    }
   }
 }) 
