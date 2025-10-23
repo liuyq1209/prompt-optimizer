@@ -1,20 +1,26 @@
 version: '3.8'
 
+# 内网部署配置示例
+# 使用方法: docker-compose -f docker-compose.internal.yml up -d
+
 services:
   prompt-optimizer:
-    image: linshen/prompt-optimizer:latest
-#     Alternatively, you can build from source with custom registry:
-#     build:
-#        context: .
-#        dockerfile: Dockerfile
-#        args:
-#          - NODE_IMAGE=your-internal-registry/node:20-slim
-#          - NGINX_IMAGE=your-internal-registry/nginx:stable-alpine
-#          - NPM_REGISTRY=https://your-internal-npm-registry.com/
-    container_name: prompt-optimizer
+    # 使用内网镜像仓库
+    image: your-internal-registry/prompt-optimizer:latest
+    # 或者从源码构建，使用内网镜像
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        # 使用内网镜像仓库
+        - NODE_IMAGE=your-internal-registry/node:20-slim
+        - NGINX_IMAGE=your-internal-registry/nginx:stable-alpine
+        # 使用内网npm镜像
+        - NPM_REGISTRY=https://your-internal-npm-registry.com/
+    container_name: prompt-optimizer-internal
     restart: unless-stopped
     ports:
-      - "8081:${NGINX_PORT:-80}"      # Web应用端口（包含MCP服务器，通过/mcp路径访问）
+      - "8081:${NGINX_PORT:-80}"
     healthcheck:
       test: ["CMD", "sh", "-c", "curl -f http://localhost:${NGINX_PORT:-80}/ && curl -f http://localhost:${NGINX_PORT:-80}/mcp"]
       interval: 30s
@@ -41,13 +47,20 @@ services:
       - MCP_DEFAULT_LANGUAGE=${MCP_DEFAULT_LANGUAGE:-zh}
       - MCP_DEFAULT_MODEL_PROVIDER=${MCP_DEFAULT_MODEL_PROVIDER:-openai}
 
-      # 企业级配置（可选）
+      # 企业级配置
       - APOLLO_CONFIG_SERVER_URL=${APOLLO_CONFIG_SERVER_URL:-}
       - NODE_TRACE_ENABLED=${NODE_TRACE_ENABLED:-false}
       - XLOG_ENABLED=${XLOG_ENABLED:-false}
 
-      # Basic认证配置（可选）
+      # Basic认证配置
       - ACCESS_USERNAME=${ACCESS_USERNAME:-admin}
       - ACCESS_PASSWORD=${ACCESS_PASSWORD:-}
     security_opt:
       - no-new-privileges:true
+    # 内网部署可能需要额外的网络配置
+    networks:
+      - internal-network
+
+networks:
+  internal-network:
+    driver: bridge
