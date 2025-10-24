@@ -1,6 +1,6 @@
 # 支持内网镜像配置
-ARG NODE_IMAGE=node:20-slim
-ARG NGINX_IMAGE=nginx:stable-alpine
+ARG NODE_IMAGE=repo-dev.htsc/public-cncp-image-base-local/node:20
+ARG NGINX_IMAGE=repo-dev.htsc/public-cncp-image-base-local/nginx
 
 FROM ${NODE_IMAGE} AS base
 ENV PNPM_HOME="/pnpm"
