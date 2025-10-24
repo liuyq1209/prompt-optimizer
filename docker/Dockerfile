@@ -27,7 +27,7 @@ RUN npm config set registry ${NPM_REGISTRY}
 RUN npm install -g pnpm
 
 # 复制Nginx配置
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY docker/nginx.conf /etc/nginx/conf.d/default.conf
 
 # 复制Web应用
 COPY --from=build /app/packages/web/dist /usr/share/nginx/html
@@ -50,30 +50,38 @@ ENV NGINX_PORT=80
 ENV NODE_ENV=production
 ENV MCP_HTTP_PORT=3000
 ENV MCP_LOG_LEVEL=info
+ENV NODE_PROXY_PORT=3001
+
+# 创建必要的目录
+RUN mkdir -p /docker-entrypoint.d /var/log/supervisor
 
 # 设置MCP服务器工作目录
 WORKDIR /app/mcp-server
 
 # 复制并设置启动脚本
-COPY generate-config.sh /docker-entrypoint.d/40-generate-config.sh
-COPY generate-auth.sh /docker-entrypoint.d/30-generate-auth.sh
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-COPY start.sh /start.sh
-COPY start-services.sh /start-services.sh
+COPY docker/generate-config.sh /docker-entrypoint.d/40-generate-config.sh
+COPY docker/generate-auth.sh /docker-entrypoint.d/30-generate-auth.sh
+COPY docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY docker/start.sh /start.sh
+COPY docker/start-services.sh /start-services.sh
+
+# 转换可能的Windows行尾符为Unix格式（在设置权限之前）
+RUN dos2unix /docker-entrypoint.d/40-generate-config.sh && \
+    dos2unix /docker-entrypoint.d/30-generate-auth.sh && \
+    dos2unix /start.sh && \
+    dos2unix /start-services.sh
 
 # 确保脚本有执行权限
-RUN chmod +x /docker-entrypoint.d/40-generate-config.sh
-RUN chmod +x /docker-entrypoint.d/30-generate-auth.sh
-RUN chmod +x /start.sh
-RUN chmod +x /start-services.sh
+RUN chmod +x /docker-entrypoint.d/40-generate-config.sh && \
+    chmod +x /docker-entrypoint.d/30-generate-auth.sh && \
+    chmod +x /start.sh && \
+    chmod +x /start-services.sh
 
-# 转换可能的Windows行尾符为Unix格式
-RUN dos2unix /docker-entrypoint.d/40-generate-config.sh
-RUN dos2unix /docker-entrypoint.d/30-generate-auth.sh
-RUN dos2unix /start.sh
-RUN dos2unix /start-services.sh
-
+# 暴露端口
+# 80: Nginx Web服务和API代理
+# 3000: MCP服务器（内部，通过Nginx代理）
+# 3001: Node Proxy服务（内部，通过Nginx代理）
 EXPOSE 80
 
-# 使用简化的启动脚本（可选择使用start.sh或start-services.sh）
+# 使用启动脚本
 CMD ["sh", "/start.sh"]
