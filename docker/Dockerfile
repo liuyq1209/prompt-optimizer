@@ -19,7 +19,15 @@ RUN pnpm mcp:build
 
 FROM ${NGINX_IMAGE}
 # 安装Node.js、htpasswd工具、dos2unix和supervisor
-RUN apk add --no-cache apache2-utils dos2unix supervisor nodejs npm gettext curl
+RUN apt-get update && apt-get install -y \
+    apache2-utils \
+    dos2unix \
+    supervisor \
+    nodejs \
+    npm \
+    gettext \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
 
 # 安装pnpm（支持内网镜像）
 ARG NPM_REGISTRY=https://registry.npmjs.org/
