@@ -6,7 +6,7 @@ FROM ${NODE_IMAGE} AS base
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 # 支持内网npm镜像
-ARG NPM_REGISTRY=https://registry.npmjs.org/
+ARG NPM_REGISTRY=http://registry.npm.htsc/
 RUN npm config set registry ${NPM_REGISTRY}
 RUN npm install -g corepack@latest && corepack enable
 
@@ -19,18 +19,18 @@ RUN pnpm mcp:build
 
 FROM ${NGINX_IMAGE}
 # 安装Node.js、htpasswd工具、dos2unix和supervisor
-RUN apt-get update && apt-get install -y \
-    apache2-utils \
+RUN yum update -y && \
+    yum install -y \
+    httpd-tools \  
     dos2unix \
     supervisor \
-    nodejs \
     npm \
     gettext \
-    curl \
-    && rm -rf /var/lib/apt/lists/*
+    curl && \
+    yum clean all
 
 # 安装pnpm（支持内网镜像）
-ARG NPM_REGISTRY=https://registry.npmjs.org/
+ARG NPM_REGISTRY=http://registry.npm.htsc/
 RUN npm config set registry ${NPM_REGISTRY}
 RUN npm install -g pnpm
 
