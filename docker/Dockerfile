@@ -15,7 +15,11 @@ RUN pnpm config set registry ${NPM_REGISTRY}
 FROM base AS build
 COPY . /app
 WORKDIR /app
+# 跳过 electron 的 postinstall 脚本，避免网络超时
+ENV npm_config_ignore_scripts=true
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
+# 恢复脚本执行，但排除 electron 包
+ENV npm_config_ignore_scripts=false
 RUN pnpm run build
 RUN pnpm mcp:build
 
@@ -31,10 +35,6 @@ RUN yum update -y && \
     curl && \
     yum clean all
 
-# 安装pnpm（支持内网镜像）
-ARG NPM_REGISTRY=http://registry.npm.htsc/
-RUN npm config set registry ${NPM_REGISTRY}
-RUN npm install -g pnpm
 
 # 复制Nginx配置
 COPY docker/nginx.conf /etc/nginx/conf.d/default.conf

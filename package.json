@@ -76,7 +76,9 @@
   "license": "ISC",
   "pnpm": {
     "onlyBuiltDependencies": [
-      "electron"
+      "electron",
+      "electron-builder",
+      "esbuild"
     ],
     "overrides": {
       "builder-util-runtime": "9.2.10"
