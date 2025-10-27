@@ -9,6 +9,8 @@ ENV PATH="$PNPM_HOME:$PATH"
 ARG NPM_REGISTRY=http://registry.npm.htsc/
 RUN npm config set registry ${NPM_REGISTRY}
 RUN npm install -g corepack@latest && corepack enable
+# 强制 corepack 使用内网镜像
+RUN corepack config pnpm registry ${NPM_REGISTRY}
 
 FROM base AS build
 COPY . /app
