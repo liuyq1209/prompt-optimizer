@@ -29,12 +29,12 @@
           </template>
           <template #control-buttons>
             <div class="flex-1">
-              <div class="h-[20px] mb-1.5"><!-- 占位，与其他元素对齐 --></div>
+              <!-- <div class="h-[20px] mb-1.5">占位，与其他元素对齐</div> -->
               <div class="flex items-center gap-2">
                 <button
                   @click="isCompareMode = !isCompareMode"
-                  class="h-10 text-sm whitespace-nowrap"
-                  :class="isCompareMode ? 'theme-button-primary' : 'theme-button-secondary'"
+                  class="h-8 text-sm whitespace-nowrap flex items-center justify-center"
+                  :class="isCompareMode ? 'theme-button-primary gradient-button-primary' : 'theme-button-primary theme-button-secondary'"
                 >
                   {{ isCompareMode ? t('test.toggleCompare.disable') : t('test.toggleCompare.enable') }}
                 </button>
@@ -58,15 +58,15 @@
               />
               <button
                 @click="isCompareMode = !isCompareMode"
-                class="h-10 text-sm whitespace-nowrap"
-                :class="isCompareMode ? 'theme-button-primary' : 'theme-button-secondary'"
+                class="h-10 text-sm whitespace-nowrap flex items-center justify-center"
+                :class="isCompareMode ? 'gradient-button-primary' : 'theme-button-secondary'"
               >
                 {{ isCompareMode ? t('test.toggleCompare.disable') : t('test.toggleCompare.enable') }}
               </button>
               <button
                 @click="handleTest"
                 :disabled="isTesting || !selectedTestModel"
-                class="h-10 px-4 text-sm font-medium theme-button-primary"
+                class="h-10 px-4 text-sm font-medium theme-button-primary flex items-center justify-center"
               >
                 {{ isTesting ? t('test.testing') : (isCompareMode ? t('test.startCompare') : t('test.startTest')) }}
               </button>

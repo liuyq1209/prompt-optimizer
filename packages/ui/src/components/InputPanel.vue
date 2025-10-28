@@ -31,16 +31,20 @@
 
     <!-- 控制面板 -->
     <div class="flex items-center gap-2">
-      <!-- 模型选择 -->
-      <div class="min-w-[120px] w-fit shrink-0">
-        <label class="block text-sm theme-label mb-1.5">{{ modelLabel }}</label>
-        <slot name="model-select"></slot>
+      <!-- 模型选择 (水平布局) -->
+      <div class="min-w-[120px] w-fit shrink-0 flex items-center space-x-2">
+        <label class="text-sm theme-label whitespace-nowrap">{{ modelLabel }}</label>
+        <div class="min-w-0">
+          <slot name="model-select"></slot>
+        </div>
       </div>
       
-      <!-- 提示词模板选择 -->
-      <div v-if="templateLabel" class="flex-1 min-w-0">
-        <label class="block text-sm theme-label mb-1.5 truncate">{{ templateLabel }}</label>
-        <slot name="template-select"></slot>
+      <!-- 提示词模板选择 (水平布局) -->
+      <div v-if="templateLabel" class="flex-1 min-w-0 flex items-center space-x-2">
+        <label class="text-sm theme-label truncate">{{ templateLabel }}</label>
+        <div class="min-w-0 flex-1">
+          <slot name="template-select"></slot>
+        </div>
       </div>
 
       <!-- 控制按钮组插槽 -->
@@ -48,11 +52,10 @@
 
       <!-- 提交按钮 -->
       <div class="min-w-[60px]">
-        <div class="h-[20px] mb-1.5"><!-- 占位，与其他元素对齐 --></div>
         <button
           @click="$emit('submit')"
           :disabled="loading || disabled || !modelValue.trim()"
-          class="w-full h-10 theme-button-primary flex items-center truncate justify-center space-x-1"
+          class="w-full h-8 theme-button-primary gradient-button-primary flex items-center truncate justify-center space-x-1"
         >
           <span>{{ loading ? loadingText : buttonText }}</span>
         </button>

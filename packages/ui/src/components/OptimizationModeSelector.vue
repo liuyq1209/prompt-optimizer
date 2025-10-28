@@ -89,4 +89,39 @@ const updateOptimizationMode = (mode: OptimizationMode) => {
     flex: 1;
   }
 }
+
+/* 按钮切换样式优化 */
+.theme-button-toggle-active {
+  background: #E6F4FF;
+  color: #1677FF;
+  font-weight: 400;
+  border: 1px solid #BAE0FF;
+  z-index: 1;
+}
+.theme-button-toggle-inactive {
+  background: #fff;
+  color: #1D222C;
+  border: 1px solid #e0e0e0;
+}
+.optimization-mode-selector button {
+  min-width: 90px;
+  font-size: 14px;
+  border-radius: 0;
+  box-shadow: none;
+  border-right: none;
+}
+.optimization-mode-selector button:first-child {
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+.optimization-mode-selector button:last-child {
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+  border-right: 1px solid #e0e0e0;
+}
+.optimization-mode-selector .w-px {
+  width: 1px;
+  background: #e0e0e0;
+  margin: 0 0;
+}
 </style> 

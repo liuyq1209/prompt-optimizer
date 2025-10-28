@@ -1,12 +1,12 @@
 <template>
   <div 
-    class="output-display-core theme-card flex flex-col h-full relative !p-0" 
+    class="output-display-core theme-card flex flex-col h-full relative !p-0 theme-toolbar-border border-gray-200" 
     :class="displayClasses"
   >
     <!-- 统一顶层工具栏 -->
-    <div v-if="hasToolbar" data-testid="output-display-toolbar" class="theme-toolbar-bg flex items-center justify-between px-3 py-2 border-b" :class="themeToolbarBorder">
+    <div v-if="hasToolbar" data-testid="output-display-toolbar" class=" flex items-center justify-between px-3 py-2" :class="themeToolbarBorder">
       <!-- 左侧：视图控制按钮组 -->
-      <div class="flex items-center border rounded-md" :class="themeToolbarBorder">
+      <div class="flex items-center rounded-md" :class="themeToolbarBorder">
         <button 
           @click="internalViewMode = 'render'" 
           :disabled="internalViewMode === 'render'"
@@ -54,7 +54,7 @@
     <div v-if="shouldShowReasoning">
       <!-- 推理面板标题栏 -->
       <div 
-        class="reasoning-header flex items-center justify-between px-3 py-2 border-b cursor-pointer theme-toolbar-bg theme-toolbar-hover-bg"
+        class="reasoning-header flex items-center justify-between px-3 py-2 cursor-pointer theme-toolbar-bg theme-toolbar-hover-bg"
         :class="themeToolbarBorder"
         @click="toggleReasoning"
       >
@@ -414,6 +414,48 @@ defineExpose({ resetReasoningState, forceRefreshContent, forceExitEditing })
 </script>
 
 <style scoped>
+/* 顶部视图切换按钮高亮风格 */
+.theme-toolbar-button {
+  background: #fff;
+  color: #888;
+  border: 1px solid #e0e0e0;
+  min-width: 60px;
+  font-size: 13px;
+  border-radius: 0;
+}
+/* 左侧按钮，左边两个角0.375rem（无论active与否） */
+.output-display-core .flex.items-center button.theme-toolbar-button:first-child {
+  border-top-left-radius: 0.375rem;
+  border-bottom-left-radius: 0.375rem;
+}
+/* 右侧按钮，右边两个角0.375rem（无论active与否） */
+.output-display-core .flex.items-center button.theme-toolbar-button:last-child {
+  border-top-right-radius: 0.375rem;
+  border-bottom-right-radius: 0.375rem;
+}
+  
+.theme-toolbar-button-active {
+  background: #e6f0ff;
+  color: #1677FF;
+  font-weight: 400;
+  border: 1px solid #BAE0FF;
+  z-index: 1;
+}
+/* 左侧active按钮，左边两个角0.375rem */
+.output-display-core .flex.items-center.border.rounded-md button:first-child {
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+.output-display-core .flex.items-center.border.rounded-md button:last-child {
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+.output-display-core .flex.items-center.border.rounded-md .border-r {
+  border-right: 1px solid #e0e0e0 !important;
+}
+.output-display-core .flex.items-center.border.rounded-md .border-l {
+  border-left: 1px solid #e0e0e0 !important;
+}
 /* 顶层工具栏样式 */
 .output-display-toolbar {
   @apply flex-none bg-gray-50 dark:bg-gray-800;
