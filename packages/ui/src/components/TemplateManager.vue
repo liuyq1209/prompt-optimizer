@@ -52,7 +52,7 @@
             ]"
           >
             <div class="flex items-center justify-center space-x-2">
-              <span class="text-lg">🎯</span>
+              <!-- <span class="text-lg">🎯</span> -->
               <span>{{ t('templateManager.optimizeTemplates') }}</span>
             </div>
           </button>
@@ -66,7 +66,7 @@
             ]"
           >
             <div class="flex items-center justify-center space-x-2">
-              <span class="text-lg">👤</span>
+              <!-- <span class="text-lg">👤</span> -->
               <span>{{ t('templateManager.userOptimizeTemplates') }}</span>
             </div>
           </button>
@@ -80,7 +80,7 @@
             ]"
           >
             <div class="flex items-center justify-center space-x-2">
-              <span class="text-lg">🔄</span>
+              <!-- <span class="text-lg">🔄</span> -->
               <span>{{ t('templateManager.iterateTemplates') }}</span>
             </div>
           </button>

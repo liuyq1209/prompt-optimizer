@@ -15,19 +15,16 @@
 
       <!-- Actions Slot -->
       <template #actions>
-        <ThemeToggleUI />
+        <!-- <ThemeToggleUI /> -->
         <ActionButtonUI
-          icon="📝"
           :text="$t('nav.templates')"
           @click="openTemplateManager"
         />
         <ActionButtonUI
-          icon="📜"
           :text="$t('nav.history')"
           @click="historyManager.showHistory = true"
         />
         <ActionButtonUI
-          icon="⚙️"
           :text="$t('nav.modelManager')"
           @click="modelManager.showConfig = true"
         />
