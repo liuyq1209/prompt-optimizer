@@ -56,7 +56,7 @@
           @click="$emit('manage', props.type)"
           class="theme-dropdown-config-button"
         >
-          <span>📝</span>
+          <!-- <span>📝</span> -->
           <span>{{ t('template.configure') }}</span>
         </button>
       </div>

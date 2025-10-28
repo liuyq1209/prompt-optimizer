@@ -221,7 +221,7 @@
                   class="theme-manager-tag ml-2"
                   :class="TemplateProcessor.isSimpleTemplate(template) ? 'bg-blue-100 text-blue-700 border-blue-200' : 'bg-purple-100 text-purple-700 border-purple-200'"
                 >
-                  {{ TemplateProcessor.isSimpleTemplate(template) ? '📝 ' + t('templateManager.simpleTemplate') : '⚡ ' + t('templateManager.advancedTemplate') }}
+                  {{ TemplateProcessor.isSimpleTemplate(template) ? ' ' + t('templateManager.simpleTemplate') : ' ' + t('templateManager.advancedTemplate') }}
                 </span>
                 <transition name="fade">
                     <span
@@ -260,8 +260,8 @@
                         : 'bg-purple-100 text-purple-700 border border-purple-200'"
                     >
                       {{ (viewingTemplate || editingTemplate) && TemplateProcessor.isSimpleTemplate((viewingTemplate || editingTemplate)!) 
-                        ? '📝 ' + t('templateManager.simpleTemplate') 
-                        : '⚡ ' + t('templateManager.advancedTemplate') }}
+                        ? ' ' + t('templateManager.simpleTemplate') 
+                        : ' ' + t('templateManager.advancedTemplate') }}
                     </span>
                   </div>
                   <div class="flex items-center space-x-3">
@@ -314,7 +314,7 @@
                         ]"
                       >
                         <div class="flex items-center justify-center space-x-2">
-                          <span>📝</span>
+                          <!-- <span>📝</span> -->
                           <span>{{ t('templateManager.simpleTemplate') }}</span>
                         </div>
                       </button>
@@ -329,7 +329,7 @@
                         ]"
                       >
                         <div class="flex items-center justify-center space-x-2">
-                          <span>⚡</span>
+                          <!-- <span>⚡</span> -->
                           <span>{{ t('templateManager.advancedTemplate') }}</span>
                         </div>
                       </button>
