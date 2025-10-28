@@ -33,8 +33,7 @@
               <div class="flex items-center gap-2">
                 <button
                   @click="isCompareMode = !isCompareMode"
-                  class="h-8 text-sm whitespace-nowrap flex items-center justify-center"
-                  :class="isCompareMode ? 'theme-button-primary gradient-button-primary' : 'theme-button-primary theme-button-secondary'"
+                  class="h-8 text-sm whitespace-nowrap flex items-center justify-center gradient-button-primary"
                 >
                   {{ isCompareMode ? t('test.toggleCompare.disable') : t('test.toggleCompare.enable') }}
                 </button>
@@ -58,8 +57,7 @@
               />
               <button
                 @click="isCompareMode = !isCompareMode"
-                class="h-10 text-sm whitespace-nowrap flex items-center justify-center"
-                :class="isCompareMode ? 'gradient-button-primary' : 'theme-button-secondary'"
+                class="h-10 text-sm whitespace-nowrap flex items-center justify-center gradient-button-primary"
               >
                 {{ isCompareMode ? t('test.toggleCompare.disable') : t('test.toggleCompare.enable') }}
               </button>

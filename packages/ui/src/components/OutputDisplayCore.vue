@@ -1,6 +1,6 @@
 <template>
   <div 
-    class="output-display-core theme-card flex flex-col h-full relative !p-0 theme-toolbar-border border-gray-200" 
+    class="output-display-core theme-card flex flex-col h-full relative theme-toolbar-border border-solid border-gray-200" 
     :class="displayClasses"
   >
     <!-- 统一顶层工具栏 -->
