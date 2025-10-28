@@ -834,8 +834,8 @@ const handleFetchEditingModels = async () => {
   
   try {
     // 检查是否为htsc模型，如果是则直接使用静态配置
-    if (editingModel.value.originalKey === 'htsc') {
-      const originalModel = await modelManager.getModel('htsc');
+    if (editingModel.value.originalKey === 'HT大模型') {
+      const originalModel = await modelManager.getModel('HT大模型');
       if (originalModel && originalModel.models && originalModel.models.length > 0) {
         modelOptions.value = originalModel.models.map(m => ({ value: m, label: m }));
         toast.success(t('modelManager.fetchModelsSuccess', {count: originalModel.models.length}));

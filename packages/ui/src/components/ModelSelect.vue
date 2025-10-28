@@ -52,7 +52,7 @@
           @click="$emit('config')"
           class="theme-dropdown-config-button"
         >
-          <span>⚙️</span>
+          <!-- <span>⚙️</span> -->
           <span>{{ t('model.select.configure') }}</span>
         </button>
       </div>

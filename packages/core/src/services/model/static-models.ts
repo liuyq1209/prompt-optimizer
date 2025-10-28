@@ -20,19 +20,9 @@ export function createStaticModels(envVars: {
   HTSC_ENABLED?: boolean | string;
 }): Record<string, ModelConfig> {
   return {
-    // saasDeepseekv3: {
-    //   name: 'ht::saas-deepseek-v3',
-    //   baseURL:  'http://168.63.65.40:8090/llm-service/v1/chat/completions',
-    //   models: ['saas-deepseek-v3','saas-deepseek-r1'],
-    //   defaultModel: 'saas-deepseek-v3',
-    //   apiKey: envVars.HTSC_API_KEY,
-    //   enabled: true,
-    //   provider: 'ht',
-    //   llmParams: {}
-    // },
-    htsc:{
-      name: 'htsc',
-      baseURL:  'http://webassist.saassit.htsc.com.cn/llmproxy/web/unauth/LLM_api_proxy/v1/chat/completions',
+    HT大模型:{
+      name: 'HT大模型',
+      baseURL: 'http://webassist.saassit.htsc.com.cn/llmproxy/web/unauth/LLM_api_proxy/v1/chat/completions',
       models: [
         'ht::saas-deepseek-v3',
         'ht::saas-deepseek-r1',
@@ -47,7 +37,14 @@ export function createStaticModels(envVars: {
       defaultModel: 'ht::saas-deepseek-v3',
       enabled: true,
       provider: 'ht',
-      llmParams: {}
+      llmParams: {
+        temperature: 0.7,
+        max_tokens: 4096,
+        top_p: 0.9,
+        presence_penalty: 0.1,
+        frequency_penalty: 0.1,
+        timeout: 60000
+      }
     },
     openai: {
       name: 'OpenAI',
