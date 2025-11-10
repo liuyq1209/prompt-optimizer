@@ -26,7 +26,7 @@
         <button
           v-if="optimizedPrompt"
           @click="handleIterate"
-          class="px-3 py-1.5 theme-button-secondary flex items-center space-x-2"
+          class="px-3 py-1.5 theme-button-secondary gradient-button-primary flex items-center space-x-2"
           :disabled="isIterating"
         >
           <span>{{ isIterating ? t('prompt.optimizing') : t('prompt.continueOptimize') }}</span>

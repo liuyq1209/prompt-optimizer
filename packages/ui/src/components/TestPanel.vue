@@ -64,7 +64,7 @@
               <button
                 @click="handleTest"
                 :disabled="isTesting || !selectedTestModel"
-                class="h-10 px-4 text-sm font-medium theme-button-primary flex items-center justify-center"
+                class="h-10 px-4 text-sm font-medium theme-button-primary gradient-button-primary flex items-center justify-center"
               >
                 {{ isTesting ? t('test.testing') : (isCompareMode ? t('test.startCompare') : t('test.startTest')) }}
               </button>

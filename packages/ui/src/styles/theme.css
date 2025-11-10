@@ -157,6 +157,7 @@ html * {
     border-radius: 4px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    color:#fff !important;
   }
 
   .gradient-button-primary:disabled {
@@ -183,7 +184,9 @@ html * {
   }
 
   .theme-prompt-version-selected {
-    @apply bg-stone-400/80 text-white;
+    /* @apply bg-stone-400/80 text-white; */
+    background-color: #22B35E;
+    color:#22B35E;
   }
 
   .theme-prompt-version-unselected {
